@@ -4,8 +4,11 @@
 
 Для запуска нужно создать файл .env и добавить свои данные:
 CONFIG_SERVER_URI=
+
 CONFIG_SERVER_FILE=
+
 CONFIG_SERVER_USERNAME=
+
 CONFIG_SERVER_PASSWORD=
 
 
