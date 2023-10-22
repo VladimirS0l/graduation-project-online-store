@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.service.user.usersservice.security.JwtTokenFilter;
 import ru.service.user.usersservice.security.JwtTokenProvider;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
+import ru.service.user.usersservice.security.JwtUserDetailsService;
+import ru.service.user.usersservice.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -32,6 +35,16 @@ public class ApplicationConfig {
 
     private final ApplicationContext applicationContext;
     private final JwtTokenProvider tokenProvider;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtUserDetailsService userService;
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailsService(userService);
+        return provider;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -97,13 +110,11 @@ public class ApplicationConfig {
                                                     .write("Unauthorized.");
                                         }))
                 .authorizeHttpRequests(configurer ->
-                        configurer.requestMatchers("/api/v1/auth/**")
+                        configurer.requestMatchers("/api/auth/**")
                                 .permitAll()
                                 .requestMatchers("/swagger-ui/**")
                                 .permitAll()
                                 .requestMatchers("/v3/api-docs/**")
-                                .permitAll()
-                                .requestMatchers("/graphiql")
                                 .permitAll()
                                 .anyRequest().authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)
