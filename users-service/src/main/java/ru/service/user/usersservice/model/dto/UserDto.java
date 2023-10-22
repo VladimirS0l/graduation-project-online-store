@@ -3,14 +3,18 @@ package ru.service.user.usersservice.model.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import ru.service.user.usersservice.model.validation.OnCreate;
 import ru.service.user.usersservice.model.validation.OnUpdate;
 
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Schema(description = "User DTO")
 public class UserDto implements Serializable {
 

@@ -44,9 +44,13 @@ public class UserServiceImpl implements UserService {
             @CachePut(value = "UserService::getById", key="#p0", condition="#p0!=null"),
             @CachePut(value = "UserService::getByUsername", key="#p0", condition="#p0!=null")
     })
-    public User update(final User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public User update(Long id, User user) {
+        User updateUser = userRepository.findById(id)
+                .orElseThrow(() ->
+                new ResourceNotFoundException("User not found."));
+        updateUser.setName(user.getName());
+        updateUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(updateUser);
         return user;
     }
 
