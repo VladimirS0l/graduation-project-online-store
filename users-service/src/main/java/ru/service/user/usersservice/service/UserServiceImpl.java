@@ -8,10 +8,11 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.service.user.usersservice.exceptions.ResourceNotFoundException;
 import ru.service.user.usersservice.model.Role;
 import ru.service.user.usersservice.model.User;
 import ru.service.user.usersservice.repository.UserRepository;
+import ru.solarev.api.apiservice.exceptions.ResourceNotFoundException;
+
 import java.util.Set;
 
 @Service

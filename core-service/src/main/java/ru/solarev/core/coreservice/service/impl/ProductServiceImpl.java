@@ -1,6 +1,5 @@
 package ru.solarev.core.coreservice.service.impl;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

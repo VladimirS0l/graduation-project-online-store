@@ -21,22 +21,22 @@ import ru.service.user.usersservice.service.UserService;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Validated
-@Tag(name = "Auth Controller", description = "Auth API")
+@Tag(name = "Авторизация", description = "Методы работы с авторизацией")
 public class AuthController {
     private final AuthService authService;
     private final UserService userService;
     private final UserConverter userConverter;
 
+    @Operation(summary = "Вход в аккаунт")
     @PostMapping("/login")
-    @Operation(summary = "Login user")
     public JwtResponse login(@Validated
                              @RequestBody final JwtRequest loginRequest) {
         System.out.println(loginRequest);
         return authService.login(loginRequest);
     }
 
+    @Operation(summary = "Регистрация пользователя")
     @PostMapping("/register")
-    @Operation(summary = "Register user")
     public UserDto register(@Validated(OnCreate.class)
                             @RequestBody final UserDto userDto) {
         System.out.println(userDto);
@@ -46,8 +46,8 @@ public class AuthController {
         return userConverter.entityToDto(createdUser);
     }
 
+    @Operation(summary = "Обновить токен")
     @PostMapping("/refresh")
-    @Operation(summary = "Refresh token")
     public JwtResponse refresh(@RequestBody final String refreshToken) {
         return authService.refresh(refreshToken);
     }

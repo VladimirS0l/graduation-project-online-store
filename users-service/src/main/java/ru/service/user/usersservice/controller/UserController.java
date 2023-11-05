@@ -15,14 +15,14 @@ import ru.service.user.usersservice.service.UserService;
 @RequestMapping("api/users")
 @RequiredArgsConstructor
 @Validated
-@Tag(name = "User Controller", description = "User API")
+@Tag(name = "Пользователи", description = "Методы для управления данными пользователя")
 public class UserController {
 
     private final UserService userService;
     private final UserConverter userConverter;
 
+    @Operation(summary = "Обновить пользователя")
     @PutMapping("/{id}")
-    @Operation(summary = "Update user")
     public UserDto update(@PathVariable("id") Long id,@Validated(OnUpdate.class)
                               @RequestBody UserDto userDto) {
         User user = userConverter.dtoToUser(userDto);
@@ -30,15 +30,15 @@ public class UserController {
         return userConverter.entityToDto(userUpdate);
     }
 
+    @Operation(summary = "Получить пользователя по ID")
     @GetMapping("/{id}")
-    @Operation(summary = "Get user by ID")
     public UserDto getById(@PathVariable("id") Long id) {
         User user = userService.getById(id);
         return userConverter.entityToDto(user);
     }
 
+    @Operation(summary = "Удалить пользователя по ID")
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete user by ID")
     public void deleteById(@PathVariable("id") Long id) {
         userService.delete(id);
     }

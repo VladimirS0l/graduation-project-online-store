@@ -1,4 +1,4 @@
-package ru.solarev.core.coreservice.dto;
+package ru.solarev.api.apiservice.core;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,9 +10,7 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 public class OrderItemDto {
-//    @Schema(description = "Идентификатор элемента заказа", required = true, example = "1")
     private Long productId;
-//    @Schema(description = "Название товара", required = true, example = "Товар#1")
     private String productTitle;
     private Integer quantity;
     private BigDecimal pricePerProduct;

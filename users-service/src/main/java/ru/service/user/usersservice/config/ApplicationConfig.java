@@ -1,6 +1,5 @@
 package ru.service.user.usersservice.config;
 
-
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -26,7 +25,6 @@ import ru.service.user.usersservice.security.JwtTokenFilter;
 import ru.service.user.usersservice.security.JwtTokenProvider;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import ru.service.user.usersservice.security.JwtUserDetailsService;
-import ru.service.user.usersservice.service.UserService;
 
 @Configuration
 @EnableWebSecurity

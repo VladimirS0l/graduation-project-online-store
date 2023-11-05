@@ -1,8 +1,9 @@
 package ru.solarev.core.coreservice.service;
 
-import ru.solarev.core.coreservice.dto.OrderDetailsDto;
+import ru.solarev.api.apiservice.core.OrderDetailsDto;
+import ru.solarev.api.apiservice.core.enums.OrderStatus;
 import ru.solarev.core.coreservice.model.Order;
-import ru.solarev.core.coreservice.model.OrderStatus;
+
 
 import java.util.List;
 
@@ -11,11 +12,10 @@ public interface OrderService {
     Order save(String username, OrderDetailsDto orderDetailsDto);
 
     void changeStatus(OrderStatus orderStatus, Long id);
-    public List<Order> getAllOrders();
+    List<Order> findAll();
+    List<Order> findAllByUsername(String username);
 
-    public Order getOrderById(Long id);
+    Order getOrderById(Long id);
 
-    public Order createOrder(Order order);
-
-    public void deleteOrder(Long id);
+    void deleteOrder(Long id);
 }

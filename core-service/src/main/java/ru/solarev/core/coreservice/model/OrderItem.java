@@ -1,6 +1,5 @@
 package ru.solarev.core.coreservice.model;
 
-
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -9,8 +8,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-//@Entity
-//@Table(name = "order_items")
+@Entity
+@Table(name = "order_items")
 @Getter
 @Setter
 @AllArgsConstructor

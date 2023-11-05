@@ -16,7 +16,7 @@
     <module>users-service</module>
     <module>server-service</module>
     <module>github-service</module>
-      <module>apiservice</module>
+    <module>api-service</module>
   </modules>
 
 

@@ -3,8 +3,8 @@ package ru.solarev.core.coreservice.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import ru.solarev.api.apiservice.core.enums.OrderStatus;
 import ru.solarev.core.coreservice.model.Order;
-import ru.solarev.core.coreservice.model.OrderStatus;
 
 import java.util.List;
 

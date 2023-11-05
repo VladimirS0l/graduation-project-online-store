@@ -2,7 +2,7 @@ package ru.solarev.core.coreservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.solarev.core.coreservice.dto.ProductDto;
+import ru.solarev.api.apiservice.core.ProductDto;
 
 import java.math.BigDecimal;
 

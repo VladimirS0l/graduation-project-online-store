@@ -1,4 +1,4 @@
-package ru.solarev.core.coreservice.dto;
+package ru.solarev.api.apiservice.core;
 
 import lombok.*;
 

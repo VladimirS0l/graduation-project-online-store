@@ -1,6 +1,5 @@
 package ru.solarev.core.coreservice.converter;
 
-
 import java.util.List;
 
 public interface Mappable<E, D> {

@@ -31,24 +31,6 @@ create table if not exists products
     updated_at timestamp default current_timestamp
 );
 
-create table if not exists  categories
-(
-    id         bigserial primary key,
-    title      varchar(255) not null unique,
-    description      varchar(255)  not null ,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
-);
-
-create table if not exists  products_categories
-(
-    product_id  bigint not null references products (id),
-    category_id bigint not null references categories (id),
-    created_at  timestamp default current_timestamp,
-    updated_at  timestamp default current_timestamp,
-    primary key (product_id, category_id)
-);
-
 create table if not exists  orders
 (
     id           bigserial primary key,

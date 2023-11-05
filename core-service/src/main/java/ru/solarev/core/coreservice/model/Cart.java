@@ -1,6 +1,6 @@
 package ru.solarev.core.coreservice.model;
 
-import ru.solarev.core.coreservice.dto.ProductDto;
+import ru.solarev.api.apiservice.core.ProductDto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
