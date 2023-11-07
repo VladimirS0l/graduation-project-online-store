@@ -17,10 +17,7 @@ import java.util.function.Consumer;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-    private String currentCardKey = "";
-
-    private final String cartPrefix = "cardUuid";
-
+    private String currentCartKey = "";
     private final ProductService productService;
     private final ProductMapper mapper;
     private final CartMapper cartMapper;
@@ -28,13 +25,16 @@ public class CartServiceImpl implements CartService {
     Map<String, Cart> cartStorage = new HashMap<>();
 
     public String getCartUuidFromSuffix(String suffix) {
-        return cartPrefix + suffix;
+        return suffix;
     }
 
     public String generateCartUuid(String username) {
-        if (username != null) setCurrentCardKey(cartPrefix + username);
-        else setCurrentCardKey(UUID.randomUUID().toString());
-        return currentCardKey;
+        System.out.println(username);
+        if (username != null) setCurrentCartKey(username);
+        else setCurrentCartKey(UUID.randomUUID().toString());
+        Cart cart = new Cart();
+        cartStorage.put(getCurrentCartKey(), cart);
+        return currentCartKey;
     }
 
     public Cart getCurrentCart(String cartKey) {
@@ -42,7 +42,7 @@ public class CartServiceImpl implements CartService {
     }
 
     public CartDto getCurrentCartDtoByUsername(String username) {
-        return cartMapper.toDto(getCurrentCart(cartPrefix + username));
+        return cartMapper.toDto(getCurrentCart(username));
     }
 
     public void addToCart(String cartKey, Long productId) {
@@ -51,7 +51,7 @@ public class CartServiceImpl implements CartService {
     }
 
     public void clearCart(String cartKey) {
-        execute(cartPrefix+cartKey, Cart::clear);
+        execute(cartKey, Cart::clear);
     }
 
     public void removeItemFromCart(String cartKey, Long productId) {
@@ -77,14 +77,15 @@ public class CartServiceImpl implements CartService {
     private void execute(String cartKey, Consumer<Cart> action) {
         Cart cart = getCurrentCart(cartKey);
         action.accept(cart);
+
         cartStorage.put(cartKey, cart);
     }
 
-    public String getCurrentCardKey() {
-        return currentCardKey;
+    public String getCurrentCartKey() {
+        return currentCartKey;
     }
 
-    public void setCurrentCardKey(String currentCardKey) {
-        this.currentCardKey = currentCardKey;
+    public void setCurrentCartKey(String currentCartKey) {
+        this.currentCartKey = currentCartKey;
     }
 }

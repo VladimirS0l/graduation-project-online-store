@@ -1,5 +1,6 @@
 package ru.solarev.core.coreservice.model;
 
+import lombok.Data;
 import ru.solarev.api.apiservice.core.ProductDto;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Data
 public class Cart {
     private List<CartItem> items;
     private BigDecimal totalPrice;
