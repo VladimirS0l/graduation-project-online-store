@@ -28,8 +28,8 @@ public class OrderController {
     @Operation(summary = "Создать заказ")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDto save(@RequestHeader @Parameter(description = "Имя пользователя", required = true) String username,
-                         @RequestBody @Valid @Parameter(description = "Детали заказа", required = true)
+    public OrderDto save(@RequestHeader String username,
+                         @RequestBody @Valid
                          OrderDetailsDto orderDetailsDto,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -64,7 +64,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Изменить статус заказа")
-    @PatchMapping("/statuses/{id}")
+    @PutMapping("/statuses/{id}")
     public void changeStatus(@RequestParam OrderStatus orderStatus,
                              @PathVariable Long id) {
         ordersService.changeStatus(orderStatus, id);

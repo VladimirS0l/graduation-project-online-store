@@ -7,5 +7,4 @@ import ru.solarev.core.coreservice.model.Product;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper extends Mappable<Product, ProductDto> {
-    Page<ProductDto> toDto(Page<Product> entity);
 }

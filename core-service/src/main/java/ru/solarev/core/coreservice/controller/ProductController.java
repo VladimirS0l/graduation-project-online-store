@@ -10,6 +10,7 @@ import ru.solarev.core.coreservice.converter.ProductMapper;
 import ru.solarev.core.coreservice.service.ProductService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,8 +33,9 @@ public class ProductController {
             page = 1;
         }
 
-        return productMapper.toDto(productService
-                .searchProducts(minPrice, maxPrice, titlePart, page, pageSize));
+        return productService
+                .searchProducts(minPrice, maxPrice, titlePart, page, pageSize)
+                .map(productMapper::toDto);
     }
 
     @Operation(summary = "Показать все товары")
@@ -48,7 +50,7 @@ public class ProductController {
         return productMapper.toDto(productService.getProductById(id));
     }
 
-    @Operation(summary = "Добавить товар")
+    @Operation(summary = "Создать товар")
     @PostMapping("/create")
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
         productService.createProduct(productMapper.toEntity(productDto));

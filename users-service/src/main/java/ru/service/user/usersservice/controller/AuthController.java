@@ -18,7 +18,7 @@ import ru.service.user.usersservice.service.AuthService;
 import ru.service.user.usersservice.service.UserService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 @Validated
 @Tag(name = "Авторизация", description = "Методы работы с авторизацией")

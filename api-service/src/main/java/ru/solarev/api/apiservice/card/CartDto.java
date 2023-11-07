@@ -17,6 +17,7 @@ import java.util.List;
 public class CartDto {
     @Schema(description = "Товары в корзине", example = "{1, Товар№1, 2, 50.00, 100.00}")
     private List<CartItemDto> items;
+
     @Schema(description = "Стоимость корзины",  example = "100.00")
     private BigDecimal totalPrice;
 }

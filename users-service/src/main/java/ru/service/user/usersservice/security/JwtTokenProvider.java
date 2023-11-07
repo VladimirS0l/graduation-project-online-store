@@ -11,12 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import ru.service.user.usersservice.exceptions.AccessDeniedException;
 import ru.service.user.usersservice.model.Role;
 import ru.service.user.usersservice.model.User;
 import ru.service.user.usersservice.model.dto.JwtResponse;
 import ru.service.user.usersservice.service.UserService;
 import ru.service.user.usersservice.utils.JwtProperties;
+import ru.solarev.api.apiservice.exceptions.AccessDeniedException;
+
 import java.security.Key;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

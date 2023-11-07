@@ -29,8 +29,8 @@ public class CartController {
 
     @Operation(summary = "Генерация UUID корзины")
     @GetMapping("/generate")
-    public CartResponse getCartUuid() {
-        return new CartResponse(cartService.generateCartUuid());
+    public CartResponse getCartUuid(@RequestHeader(required = false) String username) {
+        return new CartResponse(cartService.generateCartUuid(username));
     }
 
     @Operation(summary = "Добавление продукта в корзину")

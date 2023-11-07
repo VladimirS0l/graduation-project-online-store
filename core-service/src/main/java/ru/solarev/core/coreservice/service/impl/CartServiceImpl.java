@@ -1,7 +1,10 @@
 package ru.solarev.core.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.solarev.api.apiservice.card.CartDto;
 import ru.solarev.api.apiservice.core.ProductDto;
+import ru.solarev.core.coreservice.converter.CartMapper;
 import ru.solarev.core.coreservice.converter.ProductMapper;
 import ru.solarev.core.coreservice.model.Cart;
 import ru.solarev.core.coreservice.service.CartService;
@@ -11,13 +14,16 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+@Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
+    private String currentCardKey = "";
 
     private final String cartPrefix = "cardUuid";
 
     private final ProductService productService;
     private final ProductMapper mapper;
+    private final CartMapper cartMapper;
 
     Map<String, Cart> cartStorage = new HashMap<>();
 
@@ -25,12 +31,18 @@ public class CartServiceImpl implements CartService {
         return cartPrefix + suffix;
     }
 
-    public String generateCartUuid() {
-        return UUID.randomUUID().toString();
+    public String generateCartUuid(String username) {
+        if (username != null) setCurrentCardKey(cartPrefix + username);
+        else setCurrentCardKey(UUID.randomUUID().toString());
+        return currentCardKey;
     }
 
     public Cart getCurrentCart(String cartKey) {
         return cartStorage.get(cartKey);
+    }
+
+    public CartDto getCurrentCartDtoByUsername(String username) {
+        return cartMapper.toDto(getCurrentCart(cartPrefix + username));
     }
 
     public void addToCart(String cartKey, Long productId) {
@@ -39,7 +51,7 @@ public class CartServiceImpl implements CartService {
     }
 
     public void clearCart(String cartKey) {
-        execute(cartKey, Cart::clear);
+        execute(cartPrefix+cartKey, Cart::clear);
     }
 
     public void removeItemFromCart(String cartKey, Long productId) {
@@ -66,5 +78,13 @@ public class CartServiceImpl implements CartService {
         Cart cart = getCurrentCart(cartKey);
         action.accept(cart);
         cartStorage.put(cartKey, cart);
+    }
+
+    public String getCurrentCardKey() {
+        return currentCardKey;
+    }
+
+    public void setCurrentCardKey(String currentCardKey) {
+        this.currentCardKey = currentCardKey;
     }
 }

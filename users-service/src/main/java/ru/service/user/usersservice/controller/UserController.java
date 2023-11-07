@@ -12,7 +12,7 @@ import ru.service.user.usersservice.model.validation.OnUpdate;
 import ru.service.user.usersservice.service.UserService;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("api/v1/users")
 @RequiredArgsConstructor
 @Validated
 @Tag(name = "Пользователи", description = "Методы для управления данными пользователя")

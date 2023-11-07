@@ -18,9 +18,11 @@ public class OrderDetailsDto {
     @NotBlank(message = "Имя пользователя должно быть заполнено")
     @JsonProperty("full_name")
     private String fullName;
+
     @Schema(description = "Адрес заказа", example = "614000, г. Пермь, ул. Мира, д.1, кв.1")
     @NotBlank(message = "Адрес должен быть заполнен")
     private String address;
+
     @Schema(description = "Телефон получателя", example = "+7(900)-800-00-00")
     @NotBlank(message = "Телефон должен быть заполнен")
     @Size(min = 5, message = "Длина номера телефона должна быть не менее 10 символов")

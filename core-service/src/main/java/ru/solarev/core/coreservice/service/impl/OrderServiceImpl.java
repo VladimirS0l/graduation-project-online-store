@@ -10,9 +10,9 @@ import ru.solarev.api.apiservice.exceptions.ResourceNotFoundException;
 import ru.solarev.core.coreservice.model.Order;
 import ru.solarev.core.coreservice.model.OrderItem;
 import ru.solarev.core.coreservice.repository.OrderRepository;
+import ru.solarev.core.coreservice.service.CartService;
 import ru.solarev.core.coreservice.service.OrderService;
 import ru.solarev.core.coreservice.service.ProductService;
-import ru.solarev.core.coreservice.service.web.CartWebClient;
 
 import java.util.List;
 import java.util.Set;
@@ -24,14 +24,14 @@ public class OrderServiceImpl implements OrderService {
 
     private final ProductService productService;
     private final OrderRepository orderRepository;
-    private final CartWebClient cartWebClient;
+    private final CartService cartService;
 
     @Override
     public Order save(String username, OrderDetailsDto orderDetailsDto) {
         if (username == null || orderDetailsDto == null) {
             throw new InvalidParamsException("Невалидные параметры");
         }
-        CartDto currentCart = cartWebClient.getUserCart(username);
+        CartDto currentCart = cartService.getCurrentCartDtoByUsername(username);
         Order order = new Order();
         order.setFullName(orderDetailsDto.getFullName());
         order.setAddress(orderDetailsDto.getAddress());
@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
                 }).collect(Collectors.toSet());
         order.setItems(items);
         orderRepository.save(order);
-        cartWebClient.clearUserCart(username);
+        cartService.clearCart(username);
         return order;
     }
 
